@@ -56,9 +56,8 @@ public class MainActivity extends AppCompatActivity {
             case REQ_PHOTO:
                 if (resCode == RESULT_OK) {
                     Bundle extras = data.getExtras();
-                    Bitmap imageBitmap = (Bitmap) extras.get("data");
-                    ImageView imageView = findViewById(R.id.photo_view);
-                    imageView.setImageBitmap(imageBitmap);
+                    photoImage = (Bitmap) extras.get("data");
+                    showPhoto();
                 }
                 break;
         }
