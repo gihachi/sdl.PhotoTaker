@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.provider.MediaStore;
 
 import java.util.List;
 
@@ -26,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
         photoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                // TODO: You should setup appropriate parameters for the intent
+
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
                 PackageManager manager = getPackageManager();
                 List activities = manager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
@@ -54,7 +55,10 @@ public class MainActivity extends AppCompatActivity {
         switch (reqCode) {
             case REQ_PHOTO:
                 if (resCode == RESULT_OK) {
-                    // TODO: You should implement the code that retrieve a bitmap image
+                    Bundle extras = data.getExtras();
+                    Bitmap imageBitmap = (Bitmap) extras.get("data");
+                    ImageView imageView = findViewById(R.id.photo_view);
+                    imageView.setImageBitmap(imageBitmap);
                 }
                 break;
         }
