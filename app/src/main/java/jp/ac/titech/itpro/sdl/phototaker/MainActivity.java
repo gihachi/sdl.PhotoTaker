@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final static int REQ_PHOTO = 1234;
     private Bitmap photoImage = null;
-    private String photoPath;
+    private String photoPath = null;
     private final String PHOTO_KEY = "MainActivity.photoPath";
 
     @Override
@@ -72,6 +72,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setImageFromFile(){
+
+        if(photoPath == null){
+            return;
+        }
+
+        Log.d("debug","setimage from file");
         ImageView imageView = findViewById(R.id.photo_view);
 
         // Get the dimensions of the View
@@ -85,8 +91,6 @@ public class MainActivity extends AppCompatActivity {
         int photoW = bmOptions.outWidth;
         int photoH = bmOptions.outHeight;
 
-
-        Log.d("with","targetW:"+targetW+" targetH:"+targetH);
         // Determine how much to scale down the image
         int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
 
